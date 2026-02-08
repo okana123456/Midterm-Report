@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RHNK Mid-Term Review Report - Full Integrated Version</title>
+    <style>
+        :root {
+            --rhnk-blue: #0056b3;
+            --rhnk-red: #e31c23;
+            --rhnk-green: #28a745;
+            --rhnk-orange: #fd7e14;
+            --rhnk-dark: #343a40;
+            --rhnk-light: #f8f9fa;
+            --bg-gray: #f4f6f9;
+            --chart-c1: #0056b3;
+            --chart-c2: #e31c23;
+            --chart-c3: #28a745;
+            --chart-c4: #ffc107;
+            --chart-c5: #17a2b8;
+            --chart-c6: #6c757d;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px;
+            background-color: var(--bg-gray);
+        }
+        .report-container {
+            background-color: #fff;
+            padding: 60px;
+            box-shadow: 0 0 25px rgba(0,0,0,0.08);
+            border-radius: 8px;
+        }
+        
+        /* Typography */
+        h1, h2, h3, h4, h5 { color: var(--rhnk-dark); }
+        h1 {
+            color: var(--rhnk-blue);
+            font-size: 36px;
+            text-transform: uppercase;
+            border-bottom: 3px solid var(--rhnk-red);
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        h2 {
+            color: var(--rhnk-blue);
+            font-size: 28px;
+            margin-top: 60px;
+            margin-bottom: 25px;
+            border-left: 6px solid var(--rhnk-red);
+            padding-left: 20px;
+            background-color: #eef2f7;
+            padding-top: 15px;
+            padding-bottom: 15px;
+            border-radius: 0 8px 8px 0;
+        }
+        h3 {
+            color: #444;
+            font-size: 22px;
+            margin-top: 40px;
+            font-weight: 700;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+        h4 {
+            color: var(--rhnk-red);
+            font-size: 18px;
+            margin-top: 25px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        p { margin-bottom: 15px; text-align: justify; font-size: 15px; }
+        ul, ol { margin-bottom: 15px; }
+        li { margin-bottom: 8px; }
+        
+        .highlight { color: var(--rhnk-red); font-weight: bold; }
+        .blue-highlight { color: var(--rhnk-blue); font-weight: bold; }
+
+        /* Tables */
+        table { width: 100%; border-collapse: collapse; margin: 30px 0; font-size: 14px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        th { background-color: var(--rhnk-blue); color: #fff; padding: 12px; text-align: left; text-transform: uppercase; font-size: 12px; }
+        td { border: 1px solid #e0e0e0; padding: 12px; vertical-align: top; }
+        tr:nth-child(even) { background-color: #f8f9fa; }
+
+        /* --- VISUAL COMPONENTS --- */
+
+        /* Stat Boxes */
+        .stat-box {
+            background: linear-gradient(135deg, var(--rhnk-blue) 0%, #004494 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin: 30px 0;
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,86,179,0.3);
+        }
+        .stat-item h4 { font-size: 36px; margin: 0; color: #fff; font-weight: 800; }
+        .stat-item span { font-size: 14px; opacity: 0.9; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* General Viz Container */
+        .viz-container {
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 25px;
+            margin: 30px 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        .viz-title {
+            text-align: center;
+            font-weight: 700;
+            color: var(--rhnk-blue);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            font-size: 14px;
+            letter-spacing: 1px;
+        }
+
+        /* Introduction Infographics */
+        .layer-container { display: flex; flex-direction: column; gap: 15px; margin: 30px 0; }
+        .layer-card { display: flex; align-items: center; padding: 20px; border-radius: 8px; background: white; border-left: 10px solid; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+        .layer-1 { border-color: var(--rhnk-blue); } .layer-2 { border-color: var(--rhnk-red); } .layer-3 { border-color: var(--rhnk-green); }
+        .layer-icon { font-size: 24px; font-weight: bold; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; margin-right: 20px; flex-shrink: 0; }
+        .l-icon-1 { background-color: var(--rhnk-blue); } .l-icon-2 { background-color: var(--rhnk-red); } .l-icon-3 { background-color: var(--rhnk-green); }
+        
+        .facilities-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin: 30px 0; }
+        .facility-card { background: #fff; border: 1px solid #eee; border-top: 5px solid var(--rhnk-blue); border-radius: 8px; padding: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+
+        .roles-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; margin-bottom: 30px; }
+        .role-badge { background: white; padding: 15px; text-align: center; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); border-bottom: 3px solid var(--rhnk-red); }
+
+        /* Methodology Infographics */
+        .method-mix { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 15px; }
+        .method-item { flex: 1; min-width: 150px; text-align: center; padding: 20px; border-radius: 8px; color: white; }
+        .method-item:nth-child(1) { background: var(--rhnk-blue); } .method-item:nth-child(2) { background: var(--rhnk-red); } .method-item:nth-child(3) { background: var(--rhnk-green); } .method-item:nth-child(4) { background: var(--rhnk-orange); }
+
+        /* Findings Charts */
+        .pie-chart-wrapper { display: flex; justify-content: center; align-items: center; gap: 40px; flex-wrap: wrap; }
+        .pie-chart { width: 180px; height: 180px; border-radius: 50%; position: relative; }
+        .pie-legend { font-size: 13px; }
+        .legend-item { display: flex; align-items: center; margin-bottom: 5px; }
+        .color-box { width: 12px; height: 12px; margin-right: 8px; border-radius: 2px; }
+
+        .chart-row { display: flex; align-items: center; margin-bottom: 10px; font-size: 13px; }
+        .chart-label { width: 150px; text-align: right; padding-right: 15px; font-weight: 600; color: #555; }
+        .chart-bar-area { flex: 1; background: #f0f0f0; height: 25px; border-radius: 4px; overflow: hidden; position: relative; }
+        .chart-bar { height: 100%; display: flex; align-items: center; justify-content: flex-end; padding-right: 10px; color: white; font-weight: bold; font-size: 11px; transition: width 1s; }
+
+        /* Crisis Alert */
+        .crisis-alert { background-color: #fff5f5; border: 2px solid var(--rhnk-red); border-radius: 8px; padding: 25px; margin: 30px 0; position: relative; }
+        .crisis-alert::before { content: '⚠️ CRITICAL ALERT'; position: absolute; top: -12px; left: 20px; background: var(--rhnk-red); color: white; padding: 2px 10px; font-size: 12px; font-weight: bold; border-radius: 4px; }
+
+        /* Pyramid */
+        .pyramid-container { display: flex; flex-direction: column; align-items: center; margin: 30px 0; }
+        .priority-box { padding: 15px; margin-bottom: 10px; color: white; text-align: center; font-weight: bold; border-radius: 4px; }
+        .p-critical { background: #dc3545; } .p-high { background: #fd7e14; } .p-medium { background: #ffc107; color: #333; } .p-low { background: #28a745; }
+
+        /* Roadmap */
+        .roadmap { display: flex; justify-content: space-between; margin: 40px 0; position: relative; }
+        .roadmap::before { content: ''; position: absolute; top: 20px; left: 0; right: 0; height: 4px; background: #e9ecef; z-index: 0; }
+        .milestone { position: relative; z-index: 1; width: 23%; text-align: center; }
+        .m-dot { width: 40px; height: 40px; background: var(--rhnk-blue); border-radius: 50%; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; border: 4px solid white; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .m-content { background: #f8f9fa; padding: 15px; border-radius: 8px; border-top: 3px solid var(--rhnk-blue); font-size: 13px; }
+
+        /* Lessons */
+        .lessons-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; margin-top: 20px; }
+        .lesson-card { background: white; border: 1px solid #eee; border-left: 4px solid var(--rhnk-green); padding: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .lesson-num { font-size: 30px; color: #eee; font-weight: 900; line-height: 1; margin-bottom: -20px; text-align: right; }
+        .lesson-title { font-weight: bold; color: var(--rhnk-blue); margin-bottom: 10px; display: block; }
+        
+        /* CTA */
+        .cta-box { background: linear-gradient(135deg, var(--rhnk-blue), #003366); color: white; padding: 40px; text-align: center; border-radius: 12px; margin-top: 50px; }
+
+    </style>
+</head>
+<body>
+
+<div class="report-container">
+
+    <!-- 1. FRONT MATTER -->
+    <div style="text-align: center; margin-bottom: 60px;">
+        <h1 style="border: none; margin-bottom: 10px;">Reproductive Health Network Kenya</h1>
+        <h2 style="border: none; margin-top: 0; color: #e31c23; background: none; padding: 0;">Mid-Term Review Report: Strategic Plan 2022–2027</h2>
+        <p style="text-align: center; font-style: italic; color: #666;">
+            <strong>Review Period:</strong> January 2022 – January 2026<br>
+            <strong>Date:</strong> February 2026<br>
+            <strong>Status:</strong> Final Comprehensive Evaluation
+        </p>
+    </div>
+
+    <!-- 2. EXECUTIVE SUMMARY -->
+    <h2>1. Executive Summary</h2>
+    <p>
+        The Reproductive Health Network Kenya (RHNK) stands at a pivotal moment in its organizational history as it concludes the first half of its ambitious 2022–2027 Strategic Plan. This Mid-Term Review (MTR) serves not merely as a retrospective evaluation but as a strategic compass intended to guide the organization through the complex landscape of Sexual and Reproductive Health and Rights (SRHR) in Kenya over the coming years. The review period, spanning from January 2022 to January 2026, has been characterized by significant growth, resilience in the face of external challenges, and an unwavering commitment to the vision of a healthy society with comprehensive health information for all.
+    </p>
+    <p>
+        The findings of this evaluation unequivocally demonstrate that RHNK has solidified its position as a premier provider of SRHR advocacy and services. Through a robust network of private providers, community engagement, and strategic policy influence, the organization has achieved and, in several instances, surpassed its mid-term targets. The most notable achievement is the expansion of service delivery, with the network now facilitating high-quality care to over <span class="blue-highlight">4.4 million Kenyans annually</span>. This figure represents a substantial increase from the baseline and reflects the effectiveness of the network's decentralized service delivery model.
+    </p>
+    <div class="stat-box">
+        <div class="stat-item"><h4>4.4M+</h4><span>Clients Served</span></div>
+        <div class="stat-item"><h4>625</h4><span>Member Facilities</span></div>
+        <div class="stat-item"><h4>43</h4><span>Counties Covered</span></div>
+        <div class="stat-item"><h4>310K</h4><span>Youth Reached</span></div>
+    </div>
+    <p>
+        Financial resilience has also been a hallmark of this period. Despite a contracting global funding environment, RHNK successfully diversified its donor base, increasing its annual revenue by approximately 35 percent. However, the review also identifies critical areas necessitating recalibration. The reliance on project-specific funding remains a risk to long-term sustainability, and while data systems have improved, the integration of digital health solutions across all member facilities requires accelerated effort.
+    </p>
+
+    <!-- 3. INTRODUCTION AND BACKGROUND -->
+    <h2>2. Introduction and Background</h2>
+    <h3>2.1 About RHNK: Organizational Overview</h3>
+    <p>
+        Founded in 2010, the Reproductive Health Network Kenya (RHNK) is a legally registered network that has grown into Kenya's premier sexual and reproductive health and rights organization. RHNK operates as a collaborative platform bringing together over 600 trained health professionals from private and public health facilities across 44 out of Kenya's 47 counties.
+    </p>
+
+    <!-- INFOGRAPHIC: ORGANIZATIONAL LAYERS -->
+    <div class="layer-container">
+        <div class="layer-card layer-1">
+            <div class="layer-icon l-icon-1">1</div>
+            <div class="layer-content">
+                <h5>Layer 1: Provider Network</h5>
+                <ul>
+                    <li><strong>600+</strong> trained health professionals across 44 counties.</li>
+                    <li>Private, Public, and Faith-based health facilities.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="layer-card layer-2">
+            <div class="layer-icon l-icon-2">2</div>
+            <div class="layer-content">
+                <h5>Layer 2: Youth-Centric Outreach Platform</h5>
+                <ul>
+                    <li><strong>Youth Peer Providers (YPPs):</strong> Trained young people providing peer education.</li>
+                    <li><strong>Nena Na Binti Call Center:</strong> 24/7 confidential SRHR support line.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="layer-card layer-3">
+            <div class="layer-icon l-icon-3">3</div>
+            <div class="layer-content">
+                <h5>Layer 3: Static Facilities (As of 2024)</h5>
+                <p style="margin:0; font-size:14px;">Three Centers of Excellence: REHNET Nairobi, Naretsho Kajiado, Manyatta Kisumu.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- INFOGRAPHIC: ROLES & VALUES -->
+    <div class="roles-grid">
+        <div class="role-badge"><strong>1. Service Provider</strong><small>Direct & Networked Services</small></div>
+        <div class="role-badge"><strong>2. Policy Influencer</strong><small>National & County Advocacy</small></div>
+        <div class="role-badge"><strong>3. Convener</strong><small>Coalitions & Scientific Conference</small></div>
+        <div class="role-badge"><strong>4. Capacity Builder</strong><small>Provider & Teacher Training</small></div>
+        <div class="role-badge"><strong>5. Evidence Generator</strong><small>Research & Data</small></div>
+    </div>
+
+    <h3>2.2 The 2022-2027 Strategic Plan</h3>
+    <p>
+        The plan aims to improve sexual and reproductive health and rights for all in Kenya, focusing on youth, women, and marginalized communities. It aligns with Kenya Vision 2030 and UHC.
+    </p>
+
+    <!-- 4. OBJECTIVES AND METHODOLOGY -->
+    <h2>3. Review Objectives and Methodology</h2>
+    <h3>3.1 Methodology</h3>
+    <p>
+        The mid-term review employed a mixed-methods approach, combining quantitative and qualitative data collection and analysis to provide a comprehensive, triangulated assessment of RHNK's performance. The overall design was <strong>participatory, evidence-based, and utilization-focused.</strong>
+    </p>
+    
+    <!-- INFOGRAPHIC: METHODOLOGY MIX -->
+    <div class="method-mix">
+        <div class="method-item">
+            <span style="font-size:24px; display:block;">📊</span>
+            <strong>Stakeholder Survey</strong><br>222 Respondents
+        </div>
+        <div class="method-item">
+            <span style="font-size:24px; display:block;">🗣️</span>
+            <strong>KII Interviews</strong><br>MOH, NCPD, IPPF
+        </div>
+        <div class="method-item">
+            <span style="font-size:24px; display:block;">📈</span>
+            <strong>Service Data</strong><br>2023-2024 HMIS Analysis
+        </div>
+        <div class="method-item">
+            <span style="font-size:24px; display:block;">📑</span>
+            <strong>Document Review</strong><br>Strategic Plans & Reports
+        </div>
+    </div>
+    
+    <p style="margin-top: 15px;">
+        <strong>Data Quality:</strong> Validity and reliability were ensured through instrument pre-testing, data triangulation (comparing perception vs. hard data), and rigorous ethical standards including informed consent and confidentiality.
+    </p>
+
+    <!-- 5. KEY FINDINGS (PILLARS 1-5) -->
+    <h2>4. Key Findings by Strategic Pillar</h2>
+    <p>
+        This section presents detailed findings organized by RHNK's strategic pillars.
+    </p>
+
+    <!-- GRAPH: PERFORMANCE RATINGS -->
+    <div class="viz-container">
+        <div class="viz-title">Stakeholder Performance Ratings (N=222)</div>
+        <div class="chart-row"><div class="chart-label">Service Delivery</div><div class="chart-bar-area"><div class="chart-bar" style="width: 88%; background: var(--rhnk-blue);">4.40 / 5.0</div></div></div>
+        <div class="chart-row"><div class="chart-label">Policy & Advocacy</div><div class="chart-bar-area"><div class="chart-bar" style="width: 87%; background: var(--rhnk-red);">4.36 / 5.0</div></div></div>
+        <div class="chart-row"><div class="chart-label">Youth Engagement</div><div class="chart-bar-area"><div class="chart-bar" style="width: 86%; background: var(--rhnk-green);">4.33 / 5.0</div></div></div>
+    </div>
+
+    <h3>4.1 Strategic Pillar 1: Service Delivery</h3>
+    <p>
+        Service delivery is RHNK's strongest area. In 2024, the network reached <strong>4.4 million women</strong>, a 76% increase from the previous year.
+    </p>
+    
+    <!-- PIE CHART: CONTRACEPTIVE MIX -->
+    <div class="viz-container">
+        <div class="viz-title">Contraceptive Method Mix (2024)</div>
+        <div class="pie-chart-wrapper">
+            <div class="pie-chart" style="background: conic-gradient(var(--chart-c1) 0% 32%, var(--chart-c2) 32% 55%, var(--chart-c3) 55% 73%, var(--chart-c4) 73% 88%, var(--chart-c5) 88% 98%, var(--chart-c6) 98% 100%);"></div>
+            <div class="pie-legend">
+                <div class="legend-item"><div class="color-box" style="background: var(--chart-c1);"></div>Injectables (32%)</div>
+                <div class="legend-item"><div class="color-box" style="background: var(--chart-c2);"></div>Male Condoms (23%)</div>
+                <div class="legend-item"><div class="color-box" style="background: var(--chart-c3);"></div>P2 (18%)</div>
+                <div class="legend-item"><div class="color-box" style="background: var(--chart-c4);"></div>Pills (15%)</div>
+                <div class="legend-item"><div class="color-box" style="background: var(--chart-c5);"></div>LARC (10%)</div>
+            </div>
+        </div>
+    </div>
+
+    <p><strong>Youth Leadership:</strong> Youth (0-24) account for 72% of injectable users and 79% of pill users, validating the youth-friendly model.</p>
+    <p><strong>Continuum of Care Gap:</strong> A 44:1 ratio exists between antenatal visits (448k) and postnatal visits (4.6k), highlighting a critical area for improvement.</p>
+
+    <h3>4.2 Strategic Pillar 2: Policy & Advocacy</h3>
+    <p>
+        <strong>Overall Rating: Strong.</strong> Key achievements include the launch of the <em>Chaguo Mkononi</em> self-care campaign and contribution to 7 national policies. However, stakeholders note a visibility gap—RHNK's influence is felt but not always attributed to the brand publicly.
+    </p>
+
+    <h3>4.3 Strategic Pillar 3: Youth Engagement</h3>
+    <p>
+        <strong>Overall Rating: Strong.</strong> The "Nisisikie" campaign reached 310,000 youth. A key recommendation is to increase youth governance forums from annual to quarterly to sustain momentum.
+    </p>
+    
+    <!-- 6. ORGANIZATIONAL DEVELOPMENT -->
+    <h2>5. Organizational Development & Sustainability (Pillar 6)</h2>
+    <div class="viz-container">
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+            <div><h3 style="margin: 0; border: none;">Overall Rating: Moderate</h3><div class="rating-stars">⭐⭐⭐</div></div>
+            <div style="text-align: right;"><span style="font-size: 12px; color: #666;">Survey Rating: Concerns Evident</span></div>
+        </div>
+    </div>
+    
+    <p>While operational growth (facilities, network) is impressive, financial sustainability is under threat.</p>
+    
+    <div class="crisis-alert">
+        <h4 style="margin-top: 0; color: #721c24;">CRITICAL CHALLENGE: Financial Vulnerability</h4>
+        <p>The shifting global landscape threatens SRHR funding. RHNK remains heavily reliant on restricted grants. Without rapid diversification (social enterprise, government contracts), service continuity is at risk.</p>
+    </div>
+
+    <!-- 7. ACHIEVEMENTS -->
+    <h2>6. Achievements and Milestones (2022-2025)</h2>
+    <div class="viz-container">
+        <div class="viz-title">Cumulative Highlights</div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+            <div>
+                <h5 style="color: var(--rhnk-blue);">Service Delivery</h5>
+                <ul style="font-size: 13px;"><li>✓ <strong>76% Growth:</strong> Service volume increase (2023-2024).</li><li>✓ <strong>4.4 Million Reach:</strong> Women served in 2024.</li><li>✓ <strong>200% Expansion:</strong> 1 to 3 static Centers.</li></ul>
+            </div>
+            <div>
+                <h5 style="color: var(--rhnk-red);">Policy & Advocacy</h5>
+                <ul style="font-size: 13px;"><li>✓ <strong>7 Policies:</strong> Co-developed key guidelines.</li><li>✓ <strong>Chaguo Mkononi:</strong> Launched national campaign.</li><li>✓ <strong>EPF Study Tour:</strong> Hosted EU parliamentarians.</li></ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- 8. CHALLENGES -->
+    <h2>7. Challenges and Gaps</h2>
+    <div class="pyramid-container">
+        <div class="priority-box p-critical" style="width: 100%;">CRITICAL: Financial Sustainability<div style="font-size: 12px; font-weight: normal;">Shrinking global funding | Donor Dependency</div></div>
+        <div class="priority-box p-high" style="width: 85%;">HIGH PRIORITY<div style="font-size: 12px; font-weight: normal;">Branding Gap | Policy Implementation | Postnatal Care</div></div>
+        <div class="priority-box p-medium" style="width: 70%;">MEDIUM PRIORITY<div style="font-size: 12px; font-weight: normal;">Data Systems | PrEP Uptake | Network QA</div></div>
+    </div>
+
+    <!-- 9. LESSONS LEARNED -->
+    <h2>8. Lessons Learned</h2>
+    <div class="lessons-grid">
+        <div class="lesson-card"><span class="lesson-title">System Thinking Works</span><p style="font-size: 13px; margin: 0;">Aligning with government increases effectiveness.</p></div>
+        <div class="lesson-card"><span class="lesson-title">Youth-Friendly Succeeds</span><p style="font-size: 13px; margin: 0;">Tailored services drive youth uptake.</p></div>
+        <div class="lesson-card"><span class="lesson-title">Branding Matters</span><p style="font-size: 13px; margin: 0;">Visibility affects advocacy and funding.</p></div>
+        <div class="lesson-card"><span class="lesson-title">Sustainability Can't Wait</span><p style="font-size: 13px; margin: 0;">Diversification must start early.</p></div>
+    </div>
+
+    <!-- 10. RECOMMENDATIONS -->
+    <h2>9. Recommendations & Roadmap</h2>
+    <h3>9.1 Immediate Actions (Q1 2026)</h3>
+    <p>1. <strong>Financial Sustainability Plan:</strong> Execute diversification strategy immediately.<br>2. <strong>Branding Strategy:</strong> Roll out signage for 600+ facilities.<br>3. <strong>Youth Forums:</strong> Transition to quarterly engagement.</p>
+
+    <div class="roadmap">
+        <div class="milestone"><div class="m-dot">Q1</div><div class="m-content"><strong>Urgent</strong><br>Finance & Branding</div></div>
+        <div class="milestone"><div class="m-dot">Q2</div><div class="m-content"><strong>High Priority</strong><br>PrEP & PNC Scale-up</div></div>
+        <div class="milestone"><div class="m-dot">Q3</div><div class="m-content"><strong>Strategic</strong><br>3 County Expansion</div></div>
+        <div class="milestone"><div class="m-dot">Q4</div><div class="m-content"><strong>Consolidate</strong><br>Real-Time Data</div></div>
+    </div>
+
+    <!-- 11. CONCLUSION -->
+    <h2>10. Conclusion</h2>
+    <p>
+        RHNK has demonstrated <strong>STRONG PERFORMANCE</strong> in the first half of its strategic plan, achieving exceptional reach and policy influence. However, it faces an existential sustainability challenge. The way forward requires building on its strengths while aggressively addressing financial vulnerability and visibility gaps.
+    </p>
+    <div class="cta-box">
+        <h3>Call to Action</h3>
+        <p>The Board, management, and partners must mobilize around the sustainability agenda to ensure continued high-quality care for 4.4 million Kenyans.</p>
+    </div>
+
+    <!-- 12. APPENDICES -->
+    <h2>11. Appendices</h2>
+    <div style="background: #fff; padding: 20px; border: 1px solid #ddd; border-radius: 8px;">
+        <ul style="list-style-type: none; padding: 0;">
+            <li style="border-bottom: 1px solid #eee; padding: 10px 0;"><strong>A.</strong> Survey Questionnaire</li>
+            <li style="border-bottom: 1px solid #eee; padding: 10px 0;"><strong>B.</strong> KII Guide</li>
+            <li style="border-bottom: 1px solid #eee; padding: 10px 0;"><strong>C.</strong> Statistical Tables</li>
+            <li style="border-bottom: 1px solid #eee; padding: 10px 0;"><strong>D.</strong> Stakeholder List</li>
+            <li style="padding: 10px 0;"><strong>E.</strong> Strategic Plan M&E Framework</li>
+        </ul>
+    </div>
+
+</div>
+
+</body>
+</html>
